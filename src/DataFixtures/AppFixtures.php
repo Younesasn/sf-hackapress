@@ -66,9 +66,21 @@ class AppFixtures extends Fixture
     ];
 
     private const SERVICES_CATEGORY = [
-        'Repassage',
-        'Nettoyage',
-        'Retouche'
+        [
+            'name' => 'Repassage',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptatum dolorem id nobis aliquam, esse voluptas atque omnis harum error',
+            'start_price' => 9.99,
+        ],
+        [
+            'name' => 'Nettoyage',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptatum dolorem id nobis aliquam, esse voluptas atque omnis harum error',
+            'start_price' => 11.99,
+        ],
+        [
+            'name' => 'Retouche',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptatum dolorem id nobis aliquam, esse voluptas atque omnis harum error',
+            'start_price' => 14.99,
+        ],
     ];
 
     private const PAYMENT = [
@@ -178,9 +190,11 @@ class AppFixtures extends Fixture
         $serviceCategories = [];
         foreach (self::SERVICES_CATEGORY as $oneCategory) {
             $serviceCategory = new ServiceCategory();
-            $serviceCategory->setName($oneCategory);
+            $serviceCategory->setName($oneCategory['name']);
+            $serviceCategory->setDescription($oneCategory['description']);
+            $serviceCategory->setStartPrice($oneCategory['start_price']);
             $manager->persist($serviceCategory);
-            $serviceCategories[$oneCategory] = $serviceCategory;
+            $serviceCategories[$oneCategory['name']] = $serviceCategory;
         }
 
         foreach (self::SERVICES as $oneService) {

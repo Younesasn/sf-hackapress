@@ -32,6 +32,12 @@ class ServiceCategory
     #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'category')]
     private Collection $employees;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $startPrice = null;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
@@ -111,6 +117,30 @@ class ServiceCategory
                 $employee->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStartPrice(): ?float
+    {
+        return $this->startPrice;
+    }
+
+    public function setStartPrice(?float $startPrice): static
+    {
+        $this->startPrice = $startPrice;
 
         return $this;
     }
