@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
+#[ApiResource()]
 class Service
 {
     #[ORM\Id]
@@ -31,12 +33,6 @@ class Service
 
     #[ORM\Column]
     private ?float $price = null;
-
-    /**
-     * @var Collection<int, Employee>
-     */
-    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'service')]
-    private Collection $employees;
 
     /**
      * @var Collection<int, Item>
@@ -111,36 +107,6 @@ class Service
     public function setPrice(float $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Employee>
-     */
-    public function getEmployees(): Collection
-    {
-        return $this->employees;
-    }
-
-    public function addEmployee(Employee $employee): static
-    {
-        if (!$this->employees->contains($employee)) {
-            $this->employees->add($employee);
-            $employee->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEmployee(Employee $employee): static
-    {
-        if ($this->employees->removeElement($employee)) {
-            // set the owning side to null (unless already changed)
-            if ($employee->getService() === $this) {
-                $employee->setService(null);
-            }
-        }
 
         return $this;
     }

@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ServiceCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ServiceCategoryRepository::class)]
+#[ApiResource()]
 class ServiceCategory
 {
     #[ORM\Id]
@@ -24,9 +26,16 @@ class ServiceCategory
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'category')]
     private Collection $services;
 
+    /**
+     * @var Collection<int, Employee>
+     */
+    #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'category')]
+    private Collection $employees;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->employees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +79,36 @@ class ServiceCategory
             // set the owning side to null (unless already changed)
             if ($service->getCategory() === $this) {
                 $service->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Employee>
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    public function addEmployee(Employee $employee): static
+    {
+        if (!$this->employees->contains($employee)) {
+            $this->employees->add($employee);
+            $employee->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployee(Employee $employee): static
+    {
+        if ($this->employees->removeElement($employee)) {
+            // set the owning side to null (unless already changed)
+            if ($employee->getCategory() === $this) {
+                $employee->setCategory(null);
             }
         }
 
