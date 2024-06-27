@@ -48,19 +48,19 @@ class AppFixtures extends Fixture
         [
             'name' => 'Chemise',
             'description' => 'Lorem',
-            'picture' => '/uploads/chemise.png',
+            'picture' => '/uploads/chemise.jpg',
             'category' => 'Hauts',
         ],
         [
             'name' => 'Pantalon',
             'description' => 'Lorem',
-            'picture' => '/uploads/pantalon.png',
+            'picture' => '/uploads/pantalon.jpg',
             'category' => 'Bas',
         ],
         [
             'name' => 'Chaussure',
             'description' => 'Lorem',
-            'picture' => '/uploads/chaussure.png',
+            'picture' => '/uploads/chaussure.jpg',
             'category' => 'Divers',
         ],
     ];
@@ -100,42 +100,42 @@ class AppFixtures extends Fixture
         [
             'name' => 'Repassage Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/repassage.png',
+            'picture' => '/uploads/repassage-simple.jpg',
             'price' => '100',
             'category' => 'Repassage'
         ],
         [
             'name' => 'Repassage Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/repassage.png',
+            'picture' => '/uploads/repassage-complet.jpg',
             'price' => '100',
             'category' => 'Repassage'
         ],
         [
             'name' => 'Nettoyage Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/nettoyage.png',
+            'picture' => '/uploads/nettoyage-simple.jpg',
             'price' => '100',
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Nettoyage Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/nettoyage.png',
+            'picture' => '/uploads/nettoyage-complet.jpg',
             'price' => '100',
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Retouche Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/retouche.png',
+            'picture' => '/uploads/retouche-simple.jpg',
             'price' => '100',
             'category' => 'Retouche'
         ],
         [
             'name' => 'Retouche Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/retouche.png',
+            'picture' => '/uploads/retouche-complet.jpg',
             'price' => '100',
             'category' => 'Retouche'
         ]
