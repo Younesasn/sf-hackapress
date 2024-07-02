@@ -6,10 +6,10 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -17,43 +17,49 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\DiscriminatorColumn(name: "dtype", type: "string")]
 #[ORM\DiscriminatorMap(["user" => User::class, "employee" => Employee::class])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[ApiResource()]
+#[ApiResource(normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']], )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     protected ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['read', 'write'])]
     protected ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     protected array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     protected ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     protected ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     protected ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     protected ?string $address = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    protected ?\DateTimeInterface $birthday = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read', 'write'])]
     protected ?Civility $civility = null;
 
     /**
@@ -61,9 +67,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
     protected Collection $orders;
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
 
     public function __construct()
     {
@@ -108,7 +111,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        // return array_unique($roles);
+        return $roles;
     }
 
     /**
@@ -169,26 +173,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getaddress(): ?string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
-    public function setaddress(string $address): static
+    public function setAddress(string $address): static
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getBirthday(): ?\DateTimeInterface
-    {
-        return $this->birthday;
-    }
-
-    public function setBirthday(\DateTimeInterface $birthday): static
-    {
-        $this->birthday = $birthday;
 
         return $this;
     }
@@ -231,18 +223,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setCustomer(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): static
-    {
-        $this->username = $username;
 
         return $this;
     }

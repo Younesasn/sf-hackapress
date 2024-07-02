@@ -14,8 +14,6 @@ use App\Entity\User;
 use App\Entity\Service;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -144,7 +142,6 @@ class AppFixtures extends Fixture
     ];
 
     public function __construct(
-        private UserPasswordHasherInterface $hasher
     ) {
     }
 
@@ -217,25 +214,21 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setFirstname($faker->firstName);
         $user->setLastname($faker->lastName);
-        $user->setUsername('user');
         $user->setEmail('user@user.com');
         $user->setPassword('user');
         $user->setAddress($faker->address);
         $user->setCivility($civility);
-        $user->setBirthday($faker->dateTimeBetween());
-        $user->setPassword($this->hasher->hashPassword($user, 'user'));
+        $user->setPassword('user');
         $manager->persist($user);
 
         $employee = new Employee();
         $employee->setFirstname($faker->firstName);
         $employee->setLastname($faker->lastName);
-        $employee->setUsername('employee');
         $employee->setEmail('employee@employee.com');
         $employee->setPassword('employee');
         $employee->setAddress($faker->address);
         $employee->setCivility($civility);
-        $employee->setBirthday($faker->dateTimeBetween());
-        $employee->setPassword($this->hasher->hashPassword($employee, 'employee'));
+        $employee->setPassword('employee');
         $employee->setCategory($serviceCategories[$oneService['category']]);
         $manager->persist($employee);
 
