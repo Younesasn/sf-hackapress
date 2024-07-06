@@ -15,13 +15,11 @@ class JWTCreatedListener
 
     public function onJWTCreated(JWTCreatedEvent $event): void
     {
-        $request = $this->requestStack->getCurrentRequest();
         $payload = $event->getData();
 
         $user = $this->userRepository->findOneByUsername($payload['username']);
 
         $payload['user_id'] = $user->getId();
-        $payload['email'] = $user->getEmail();
 
         $event->setData($payload);
     }

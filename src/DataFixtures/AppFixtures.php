@@ -18,8 +18,8 @@ use Doctrine\Persistence\ObjectManager;
 class AppFixtures extends Fixture
 {
     private const CIVILITIES = [
-        'M.',
-        'MME.',
+        'Madame',
+        'Monsieur',
         'Autres'
     ];
 
@@ -214,7 +214,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setFirstname($faker->firstName);
         $user->setLastname($faker->lastName);
-        $user->setEmail('user@user.com');
+        $user->setUsername('user');
         $user->setPassword('user');
         $user->setAddress($faker->address);
         $user->setCivility($civility);
@@ -224,7 +224,7 @@ class AppFixtures extends Fixture
         $employee = new Employee();
         $employee->setFirstname($faker->firstName);
         $employee->setLastname($faker->lastName);
-        $employee->setEmail('employee@employee.com');
+        $employee->setUsername('employee');
         $employee->setPassword('employee');
         $employee->setAddress($faker->address);
         $employee->setCivility($civility);
