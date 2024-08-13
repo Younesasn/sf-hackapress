@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ApiUserController extends AbstractController
 {
     #[Route('/users', name: 'add_users', methods: ['POST'])]
-    public function index(Request $request, EntityManagerInterface $manager, CivilityRepository $civilityRepository, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function index(Request $request, EntityManagerInterface $manager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
         $data = $request->getContent();
         $user = $serializer->deserialize($data, User::class, 'json');

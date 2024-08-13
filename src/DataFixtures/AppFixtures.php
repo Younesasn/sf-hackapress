@@ -48,19 +48,19 @@ class AppFixtures extends Fixture
         [
             'name' => 'Chemise',
             'description' => 'Lorem',
-            'picture' => '/uploads/chemise.jpg',
+            'picture' => 'chemise.jpg',
             'category' => 'Hauts',
         ],
         [
             'name' => 'Pantalon',
             'description' => 'Lorem',
-            'picture' => '/uploads/pantalon.jpg',
+            'picture' => 'pantalon.jpg',
             'category' => 'Bas',
         ],
         [
             'name' => 'Chaussure',
             'description' => 'Lorem',
-            'picture' => '/uploads/chaussure.jpg',
+            'picture' => 'chaussure.jpg',
             'category' => 'Divers',
         ],
     ];
@@ -100,43 +100,43 @@ class AppFixtures extends Fixture
         [
             'name' => 'Repassage Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/repassage-simple.jpg',
-            'price' => '100',
+            'picture' => 'repassage-simple.jpg',
+            'price' => 9.99,
             'category' => 'Repassage'
         ],
         [
             'name' => 'Repassage Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/repassage-complet.jpg',
-            'price' => '100',
+            'picture' => 'repassage-complet.jpg',
+            'price' => 14.99,
             'category' => 'Repassage'
         ],
         [
             'name' => 'Nettoyage Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/nettoyage-simple.jpg',
-            'price' => '100',
+            'picture' => 'nettoyage-simple.jpg',
+            'price' => 11.99,
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Nettoyage Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/nettoyage-complet.jpg',
-            'price' => '100',
+            'picture' => 'nettoyage-complet.jpg',
+            'price' => 16.99,
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Retouche Simple',
             'description' => 'Lorem',
-            'picture' => '/uploads/retouche-simple.jpg',
-            'price' => '100',
+            'picture' => 'retouche-simple.jpg',
+            'price' => 14.99,
             'category' => 'Retouche'
         ],
         [
             'name' => 'Retouche Complet',
             'description' => 'Lorem',
-            'picture' => '/uploads/retouche-complet.jpg',
-            'price' => '100',
+            'picture' => 'retouche-complet.jpg',
+            'price' => 18.99,
             'category' => 'Retouche'
         ]
     ];
@@ -231,6 +231,17 @@ class AppFixtures extends Fixture
         $employee->setPassword('employee');
         $employee->setCategory($serviceCategories[$oneService['category']]);
         $manager->persist($employee);
+
+        $admin = new User();
+        $admin->setFirstname($faker->firstName);
+        $admin->setLastname($faker->lastName);
+        $admin->setUsername('admin');
+        $admin->setPassword('admin');
+        $admin->setAddress($faker->address);
+        $admin->setCivility($civility);
+        $admin->setPassword('admin');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
 
         $manager->flush();
     }
