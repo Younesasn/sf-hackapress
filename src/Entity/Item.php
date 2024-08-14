@@ -35,6 +35,9 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    private ?Employee $employee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,23 @@ class Item
     public function setService(?Service $service): static
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->id . ' - ' . $this->getProduct()->getName();
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?Employee $employee): static
+    {
+        $this->employee = $employee;
 
         return $this;
     }

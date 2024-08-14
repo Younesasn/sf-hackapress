@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240703143716 extends AbstractMigration
+final class Version20240814123555 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,7 +22,7 @@ final class Version20240703143716 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE civility (id INT AUTO_INCREMENT NOT NULL, wording VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE employee (id INT NOT NULL, category_id INT DEFAULT NULL, INDEX IDX_5D9F75A112469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE item (id INT AUTO_INCREMENT NOT NULL, command_id INT NOT NULL, product_id INT NOT NULL, matter_id INT NOT NULL, status_id INT NOT NULL, service_id INT NOT NULL, INDEX IDX_1F1B251E33E1689A (command_id), INDEX IDX_1F1B251E4584665A (product_id), INDEX IDX_1F1B251ED614E59F (matter_id), INDEX IDX_1F1B251E6BF700BD (status_id), INDEX IDX_1F1B251EED5CA9E6 (service_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE item (id INT AUTO_INCREMENT NOT NULL, command_id INT NOT NULL, product_id INT NOT NULL, matter_id INT NOT NULL, status_id INT NOT NULL, service_id INT NOT NULL, employee_id INT DEFAULT NULL, INDEX IDX_1F1B251E33E1689A (command_id), INDEX IDX_1F1B251E4584665A (product_id), INDEX IDX_1F1B251ED614E59F (matter_id), INDEX IDX_1F1B251E6BF700BD (status_id), INDEX IDX_1F1B251EED5CA9E6 (service_id), INDEX IDX_1F1B251E8C03F15C (employee_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE matter (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, coeff NUMERIC(3, 2) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `order` (id INT AUTO_INCREMENT NOT NULL, customer_id INT NOT NULL, payment_id INT NOT NULL, date DATETIME NOT NULL, total_price DOUBLE PRECISION NOT NULL, INDEX IDX_F52993989395C3F3 (customer_id), INDEX IDX_F52993984C3A3BB (payment_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE payment (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -39,6 +39,7 @@ final class Version20240703143716 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251ED614E59F FOREIGN KEY (matter_id) REFERENCES matter (id)');
         $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251E6BF700BD FOREIGN KEY (status_id) REFERENCES status (id)');
         $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251EED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
+        $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251E8C03F15C FOREIGN KEY (employee_id) REFERENCES employee (id)');
         $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F52993989395C3F3 FOREIGN KEY (customer_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F52993984C3A3BB FOREIGN KEY (payment_id) REFERENCES payment (id)');
         $this->addSql('ALTER TABLE product ADD CONSTRAINT FK_D34A04AD12469DE2 FOREIGN KEY (category_id) REFERENCES product_category (id)');
@@ -57,6 +58,7 @@ final class Version20240703143716 extends AbstractMigration
         $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251ED614E59F');
         $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251E6BF700BD');
         $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251EED5CA9E6');
+        $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251E8C03F15C');
         $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F52993989395C3F3');
         $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F52993984C3A3BB');
         $this->addSql('ALTER TABLE product DROP FOREIGN KEY FK_D34A04AD12469DE2');
