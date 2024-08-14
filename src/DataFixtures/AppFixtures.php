@@ -84,10 +84,18 @@ class AppFixtures extends Fixture
     ];
 
     private const PAYMENT = [
-        'Carte bancaire',
-        'Paypal',
-        'Apple Pay',
-        'Google Pay'
+        [
+            'name' => 'Carte bancaire',
+            'icon' => 'fa-brands fa-cc-visa'
+        ],
+        [
+            'name' => 'Paypal',
+            'icon' => 'fa-brands fa-paypal'
+        ],
+        [
+            'name' => 'Apple Pay',
+            'icon' => 'fa-brands fa-apple-pay'
+        ]
     ];
 
     private const STATUS = [
@@ -181,7 +189,8 @@ class AppFixtures extends Fixture
 
         foreach (self::PAYMENT as $onePayment) {
             $payment = new Payment();
-            $payment->setName($onePayment);
+            $payment->setName($onePayment['name']);
+            $payment->setIcon($onePayment['icon']);
             $manager->persist($payment);
         }
 
