@@ -1,26 +1,28 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Dashboard;
 
-use App\Entity\ProductCategory;
+use App\Entity\Payment;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ProductCategoryCrudController extends AbstractCrudController
+class PaymentCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return ProductCategory::class;
+        return Payment::class;
     }
 
+    /*
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
-            AssociationField::new('parent'),
-            TextField::new('name'),
+            TextField::new('title'),
+            TextEditorField::new('description'),
         ];
     }
+    */
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Dashboard;
 
-use App\Entity\Matter;
+use App\Entity\Status;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class MatterCrudController extends AbstractCrudController
+class StatusCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Matter::class;
+        return Status::class;
     }
 
     /*

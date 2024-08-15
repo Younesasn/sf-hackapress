@@ -238,6 +238,7 @@ class AppFixtures extends Fixture
         $employee->setAddress($faker->address);
         $employee->setCivility($civility);
         $employee->setPassword('employee');
+        $employee->setRoles(['ROLE_EMPLOYEE']);
         $employee->setCategory($serviceCategories[$oneService['category']]);
         $manager->persist($employee);
 

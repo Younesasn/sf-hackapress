@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Dashboard;
 
-use App\Controller\Admin\Trait\DisableNewTrait;
+use App\Controller\Dashboard\Trait\DisableNewTrait;
 use App\Entity\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
