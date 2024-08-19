@@ -38,6 +38,12 @@ class Item
     #[ORM\ManyToOne(inversedBy: 'items')]
     private ?Employee $employee = null;
 
+    #[ORM\Column]
+    private ?int $quantity = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,11 +109,6 @@ class Item
         return $this;
     }
 
-    public function __toString(): string
-    {
-        return $this->id . ' - ' . $this->getProduct()->getName();
-    }
-
     public function getEmployee(): ?Employee
     {
         return $this->employee;
@@ -116,6 +117,35 @@ class Item
     public function setEmployee(?Employee $employee): static
     {
         $this->employee = $employee;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->quantity . ' ' . $this->getProduct()->getName() . ' - ' . $this->service;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }

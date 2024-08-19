@@ -64,17 +64,17 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Orders', 'fa-brands fa-dropbox', Order::class);
         yield MenuItem::linkToCrud('Item', 'fa fa-tag', Item::class);
 
-        yield MenuItem::section('Account');
+        yield MenuItem::section('Account')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Employee', 'fa-regular fa-address-card', Employee::class)->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('User', 'fa fa-users', User::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class)->setPermission('ROLE_ADMIN');
 
-        yield MenuItem::section('Products & Services');
+        yield MenuItem::section('Products & Services')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Product', 'fa fa-shirt', Product::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Product Category', 'fa fa-table', ProductCategory::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Service', 'fa fa-handshake', Service::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Service Category', 'fa fa-table', ServiceCategory::class)->setPermission('ROLE_ADMIN');
 
-        yield MenuItem::section('Misc');
+        yield MenuItem::section('Misc')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Civility', 'fa fa-venus-mars', Civility::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Matter', 'fa-solid fa-recycle', Matter::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Payment', 'fa-solid fa-money-check-dollar', Payment::class)->setPermission('ROLE_ADMIN');
