@@ -68,4 +68,9 @@ class Employee extends User
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getUsername() . ' - ' . $this->getCategory()->getName();
+    }
 }
