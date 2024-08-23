@@ -22,8 +22,10 @@ class ItemCrudController extends AbstractCrudController
 {
     // use DisableNewTrait;
 
-    public function __construct(private Security $security){}
-    
+    public function __construct(private Security $security)
+    {
+    }
+
     public static function getEntityFqcn(): string
     {
         return Item::class;
@@ -31,12 +33,12 @@ class ItemCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions->disable(Action::NEW)->add(Crud::PAGE_INDEX, Action::DETAIL);
+        $actions->disable(Action::NEW )->add(Crud::PAGE_INDEX, Action::DETAIL);
         return $actions;
     }
 
     public function configureFields(string $pageName): iterable
-    {   
+    {
         return [
             IdField::new('id')->hideOnForm(),
             AssociationField::new('command', 'Order')->hideOnForm(),
@@ -57,7 +59,7 @@ class ItemCrudController extends AbstractCrudController
         if ($this->isGranted('ROLE_EMPLOYEE')) {
             $user = $this->security->getUser();
             $qb->andWhere('entity.employee = :employee')
-               ->setParameter('employee', $user);
+                ->setParameter('employee', $user);
         }
 
         return $qb;
