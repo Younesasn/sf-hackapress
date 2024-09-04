@@ -150,7 +150,7 @@ class AppFixtures extends Fixture
             'category' => 'Retouche'
         ]
     ];
-    
+
 
     public function __construct(
     ) {

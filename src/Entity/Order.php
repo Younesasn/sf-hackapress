@@ -39,6 +39,9 @@ class Order
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'command')]
     private Collection $items;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $deposit = null;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -130,5 +133,17 @@ class Order
     public function __toString(): string 
     {
         return $this->getId();
+    }
+
+    public function getDeposit(): ?\DateTimeInterface
+    {
+        return $this->deposit;
+    }
+
+    public function setDeposit(\DateTimeInterface $deposit): static
+    {
+        $this->deposit = $deposit;
+
+        return $this;
     }
 }

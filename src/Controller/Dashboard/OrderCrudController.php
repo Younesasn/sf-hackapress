@@ -27,6 +27,7 @@ class OrderCrudController extends AbstractCrudController
             AssociationField::new('customer'),
             AssociationField::new('payment'),
             DateField::new('date'),
+            DateField::new('deposit'),
             NumberField::new('totalPrice'),
             ArrayField::new('items'),
         ];

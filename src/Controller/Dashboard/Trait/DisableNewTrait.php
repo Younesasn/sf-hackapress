@@ -12,5 +12,4 @@ trait DisableNewTrait
         $actions->disable(Action::NEW, Action::EDIT)->add(Crud::PAGE_INDEX, Action::DETAIL);
         return $actions;
     }
-
 }
