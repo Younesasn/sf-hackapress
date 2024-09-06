@@ -2,28 +2,26 @@
 
 namespace App\EventListener;
 
-use App\Entity\User;
+use App\Entity\Item;
 use Doctrine\ORM\Events;
+use App\Repository\StatusRepository;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsDoctrineListener(Events::prePersist)]
-class HashUserPasswordListener
+class DefaultStatusListener
 {
-    public function __construct(
-        private UserPasswordHasherInterface $hasher
-    ) {
-    }
+    public function __construct(private StatusRepository $statusRepository) {}
 
     public function prePersist(PrePersistEventArgs $event): void
     {
         $entity = $event->getObject();
 
-        if (!$entity instanceof User) {
+        if (!$entity instanceof Item) {
             return;
         }
 
-        $entity->setPassword($this->hasher->hashPassword($entity, $entity->getPassword()));
+        $defaultStatus = $this->statusRepository->findOneByName('En attente de validation');
+        $entity->setStatus($defaultStatus);
     }
 }
