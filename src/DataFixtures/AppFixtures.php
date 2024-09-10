@@ -35,7 +35,15 @@ class AppFixtures extends Fixture
         [
             'name' => 'Velours',
             'coeff' => 2.00
-        ]
+        ],
+        [
+            'name' => 'Cuir',
+            'coeff' => 2.00
+        ], 
+        [
+            'name' => 'Soie',
+            'coeff' => 3.00
+        ],
     ];
 
     private const PRODUCTS_CATEGORY = [
