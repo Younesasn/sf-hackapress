@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -16,17 +17,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\DiscriminatorColumn(name: "dtype", type: "string")]
 #[ORM\DiscriminatorMap(["user" => User::class, "employee" => Employee::class])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['user:read']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:read')]
     protected ?int $id = null;
 
     /**
      * @var list<string> The user roles
      */
+    #[Groups('user:read')]
     #[ORM\Column]
     protected array $roles = [];
 
@@ -36,26 +41,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     protected ?string $password = null;
 
+    #[Groups('user:read')]
     #[ORM\Column(length: 255)]
     protected ?string $firstname = null;
 
+    #[Groups('user:read')]
     #[ORM\Column(length: 255)]
     protected ?string $lastname = null;
 
+    #[Groups('user:read')]
     #[ORM\Column(length: 255)]
     protected ?string $address = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     protected ?Civility $civility = null;
 
     /**
      * @var Collection<int, Order>
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
+    #[Groups('user:read')]
     protected Collection $orders;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:read')]
     private ?string $username = null;
 
     public function __construct()

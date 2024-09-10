@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -17,12 +18,15 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups('user:read')]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?float $totalPrice = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
@@ -31,15 +35,18 @@ class Order
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     private ?Payment $payment = null;
 
     /**
      * @var Collection<int, Item>
      */
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'command')]
+    #[Groups('user:read')]
     private Collection $items;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups('user:read')]
     private ?\DateTimeInterface $deposit = null;
 
     public function __construct()

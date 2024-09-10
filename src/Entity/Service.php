@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 #[ApiResource()]
@@ -16,6 +17,7 @@ class Service
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'services')]
@@ -23,6 +25,7 @@ class Service
     private ?ServiceCategory $category = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:read')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -32,6 +35,7 @@ class Service
     private ?string $picture = null;
 
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?float $price = null;
 
     /**

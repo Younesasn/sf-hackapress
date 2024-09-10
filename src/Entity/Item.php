@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 #[ApiResource()]
@@ -13,6 +14,7 @@ class Item
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
@@ -21,27 +23,33 @@ class Item
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     private ?Product $product = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     private ?Matter $matter = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     private ?Status $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:read')]
     private ?Service $service = null;
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     private ?Employee $employee = null;
 
     #[ORM\Column]
+    #[Groups('user:read')]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('user:read')]
     private ?string $picture = null;
 
     public function getId(): ?int
