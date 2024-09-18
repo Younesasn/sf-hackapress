@@ -3,14 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Civility;
-use App\Entity\Employee;
 use App\Entity\Matter;
 use App\Entity\Payment;
 use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Entity\ServiceCategory;
 use App\Entity\Status;
-use App\Entity\User;
 use App\Entity\Service;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -39,37 +37,132 @@ class AppFixtures extends Fixture
         [
             'name' => 'Cuir',
             'coeff' => 2.00
-        ], 
+        ],
         [
             'name' => 'Soie',
             'coeff' => 3.00
         ],
+        [
+            'name' => 'Laine',
+            'coeff' => 1.50
+        ],
+        [
+            'name' => 'Lin',
+            'coeff' => 1.10
+        ],
+        [
+            'name' => 'Polyester',
+            'coeff' => 0.90
+        ],
+        [
+            'name' => 'Nylon',
+            'coeff' => 1.00
+        ],
+        [
+            'name' => 'Viscose',
+            'coeff' => 1.30
+        ],
+        [
+            'name' => 'Cachemire',
+            'coeff' => 2.50
+        ],
+        [
+            'name' => 'Acrylique',
+            'coeff' => 1.00
+        ],
+        [
+            'name' => 'Jeans (Denim)',
+            'coeff' => 1.10
+        ],
+        [
+            'name' => 'Tweed',
+            'coeff' => 1.80
+        ],
+        [
+            'name' => 'Microfibre',
+            'coeff' => 1.40
+        ]
     ];
 
     private const PRODUCTS_CATEGORY = [
         'Hauts',
         'Bas',
+        'Robes',
+        'Accessoires',
+        'Linge de maison',
         'Divers',
     ];
 
-    private const PRODUCTS = [
+    const PRODUCTS = [
         [
             'name' => 'Chemise',
             'description' => 'Chemise élégante et parfaitement repassée, idéale pour le bureau ou les occasions spéciales. Confort et style garantis.',
-            'picture' => 'chemise.webp',
             'category' => 'Hauts',
         ],
         [
             'name' => 'Pantalon',
             'description' => 'Pantalon repassé avec soin, offrant une allure impeccable pour vos journées de travail ou vos sorties décontractées.',
-            'picture' => 'pantalon.webp',
             'category' => 'Bas',
         ],
         [
             'name' => 'Chaussure',
             'description' => 'Chaussures nettoyées et entretenues pour un éclat durable, prêtes à accompagner tous vos déplacements avec élégance.',
-            'picture' => 'chaussure.webp',
             'category' => 'Divers',
+        ],
+        [
+            'name' => 'Veste',
+            'description' => 'Veste repassée et nettoyée en profondeur pour une présentation impeccable, que ce soit pour le travail ou des occasions spéciales.',
+            'category' => 'Hauts',
+        ],
+        [
+            'name' => 'Robe',
+            'description' => 'Robe soigneusement nettoyée et repassée, prête à vous faire briller lors de soirées ou événements formels.',
+            'category' => 'Robes',
+        ],
+        [
+            'name' => 'Blouson',
+            'description' => 'Blouson nettoyé avec des techniques adaptées pour préserver la qualité du tissu tout en offrant une protection optimale.',
+            'category' => 'Hauts',
+        ],
+        [
+            'name' => 'Cravate',
+            'description' => 'Cravate nettoyée et repassée, idéale pour une présentation professionnelle soignée.',
+            'category' => 'Accessoires',
+        ],
+        [
+            'name' => 'Manteau',
+            'description' => 'Manteau soigneusement nettoyé pour enlever toutes les taches et garantir une fraîcheur durable, parfait pour l’hiver.',
+            'category' => 'Hauts',
+        ],
+        [
+            'name' => 'Couette',
+            'description' => 'Couette nettoyée en profondeur, assurant une hygiène irréprochable pour un sommeil confortable et sain.',
+            'category' => 'Linge de maison',
+        ],
+        [
+            'name' => 'Oreiller',
+            'description' => 'Oreiller nettoyé et désinfecté, idéal pour un sommeil réparateur.',
+            'category' => 'Linge de maison',
+        ],
+        [
+            'name' => 'Tapis',
+            'description' => 'Tapis nettoyé à sec ou en profondeur, préservant la qualité et la couleur tout en éliminant la saleté et les taches.',
+            'category' => 'Linge de maison',
+        ],
+        [
+            'name' => 'Costume',
+            'description' => 'Costume nettoyé et repassé avec soin, parfait pour une allure professionnelle ou pour des occasions spéciales.',
+            'category' => 'Hauts',
+        ],
+        [
+            'name' => 'Jupe',
+            'description' => 'Jupe repassée et nettoyée, idéale pour des sorties élégantes ou professionnelles.',
+            'category' => 'Bas',
+        ],
+        [
+            'name' => 'Serviette',
+            'description' => 'Serviette nettoyée et assouplie, offrant douceur et propreté pour chaque utilisation.',
+            'category' => 'Linge de maison',
         ],
     ];
 
@@ -193,7 +286,6 @@ class AppFixtures extends Fixture
             $product = new Product();
             $product->setName($oneProduct['name']);
             $product->setDescription($oneProduct['description']);
-            $product->setPicture($oneProduct['picture']);
             $product->setCategory($productCategories[$oneProduct['category']]);
             $manager->persist($product);
         }
@@ -231,38 +323,38 @@ class AppFixtures extends Fixture
             $manager->persist($service);
         }
 
-        $user = new User();
-        $user->setFirstname($faker->firstName);
-        $user->setLastname($faker->lastName);
-        $user->setUsername('user');
-        $user->setPassword('user');
-        $user->setAddress($faker->address);
-        $user->setCivility($civility);
-        $user->setPassword('user');
-        $manager->persist($user);
+        // $user = new User();
+        // $user->setFirstname($faker->firstName);
+        // $user->setLastname($faker->lastName);
+        // $user->setUsername('user');
+        // $user->setPassword('user');
+        // $user->setAddress($faker->address);
+        // $user->setCivility($civility);
+        // $user->setPassword('user');
+        // $manager->persist($user);
 
-        $employee = new Employee();
-        $employee->setFirstname($faker->firstName);
-        $employee->setLastname($faker->lastName);
-        $employee->setUsername('employee');
-        $employee->setPassword('employee');
-        $employee->setAddress($faker->address);
-        $employee->setCivility($civility);
-        $employee->setPassword('employee');
-        $employee->setRoles(['ROLE_EMPLOYEE']);
-        $employee->setCategory($serviceCategories[$oneService['category']]);
-        $manager->persist($employee);
+        // $employee = new Employee();
+        // $employee->setFirstname($faker->firstName);
+        // $employee->setLastname($faker->lastName);
+        // $employee->setUsername('employee');
+        // $employee->setPassword('employee');
+        // $employee->setAddress($faker->address);
+        // $employee->setCivility($civility);
+        // $employee->setPassword('employee');
+        // $employee->setRoles(['ROLE_EMPLOYEE']);
+        // $employee->setCategory($serviceCategories[$oneService['category']]);
+        // $manager->persist($employee);
 
-        $admin = new User();
-        $admin->setFirstname($faker->firstName);
-        $admin->setLastname($faker->lastName);
-        $admin->setUsername('admin');
-        $admin->setPassword('admin');
-        $admin->setAddress($faker->address);
-        $admin->setCivility($civility);
-        $admin->setPassword('admin');
-        $admin->setRoles(['ROLE_ADMIN']);
-        $manager->persist($admin);
+        // $admin = new User();
+        // $admin->setFirstname($faker->firstName);
+        // $admin->setLastname($faker->lastName);
+        // $admin->setUsername('admin');
+        // $admin->setPassword('admin');
+        // $admin->setAddress($faker->address);
+        // $admin->setCivility($civility);
+        // $admin->setPassword('admin');
+        // $admin->setRoles(['ROLE_ADMIN']);
+        // $manager->persist($admin);
 
         $manager->flush();
     }
