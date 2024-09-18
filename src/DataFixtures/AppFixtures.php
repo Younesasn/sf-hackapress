@@ -56,19 +56,19 @@ class AppFixtures extends Fixture
         [
             'name' => 'Chemise',
             'description' => 'Chemise élégante et parfaitement repassée, idéale pour le bureau ou les occasions spéciales. Confort et style garantis.',
-            'picture' => 'chemise.jpg',
+            'picture' => 'chemise.webp',
             'category' => 'Hauts',
         ],
         [
             'name' => 'Pantalon',
             'description' => 'Pantalon repassé avec soin, offrant une allure impeccable pour vos journées de travail ou vos sorties décontractées.',
-            'picture' => 'pantalon.jpg',
+            'picture' => 'pantalon.webp',
             'category' => 'Bas',
         ],
         [
             'name' => 'Chaussure',
             'description' => 'Chaussures nettoyées et entretenues pour un éclat durable, prêtes à accompagner tous vos déplacements avec élégance.',
-            'picture' => 'chaussure.jpg',
+            'picture' => 'chaussure.webp',
             'category' => 'Divers',
         ],
     ];
@@ -118,42 +118,42 @@ class AppFixtures extends Fixture
         [
             'name' => 'Repassage Simple',
             'description' => 'Un service de repassage rapide et soigné pour vos vêtements du quotidien, avec une attention particulière aux détails.',
-            'picture' => 'repassage-simple.jpg',
+            'picture' => 'repassage-simple.webp',
             'price' => 9.99,
             'category' => 'Repassage'
         ],
         [
             'name' => 'Repassage Complet',
             'description' => 'Un service de repassage complet qui garantit des vêtements impeccables, y compris les pièces les plus délicates.',
-            'picture' => 'repassage-complet.jpg',
+            'picture' => 'repassage-complet.webp',
             'price' => 14.99,
             'category' => 'Repassage'
         ],
         [
             'name' => 'Nettoyage Simple',
             'description' => 'Nettoyage basique de vos vêtements avec des produits de qualité, idéal pour l’entretien régulier de votre garde-robe.',
-            'picture' => 'nettoyage-simple.jpg',
+            'picture' => 'nettoyage-simple.webp',
             'price' => 11.99,
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Nettoyage Complet',
             'description' => 'Un nettoyage en profondeur pour éliminer les taches tenaces et rafraîchir vos vêtements, tout en respectant les textiles délicats.',
-            'picture' => 'nettoyage-complet.jpg',
+            'picture' => 'nettoyage-complet.webp',
             'price' => 16.99,
             'category' => 'Nettoyage'
         ],
         [
             'name' => 'Retouche Simple',
             'description' => 'Ajustements mineurs de vos vêtements pour un meilleur ajustement, comme des ourlets ou des reprises de coutures.',
-            'picture' => 'retouche-simple.jpg',
+            'picture' => 'retouche-simple.webp',
             'price' => 14.99,
             'category' => 'Retouche'
         ],
         [
             'name' => 'Retouche Complet',
             'description' => 'Service de retouche complet pour des modifications plus importantes, comme le réajustement de la taille ou la refonte de pièces spécifiques.',
-            'picture' => 'retouche-complet.jpg',
+            'picture' => 'retouche-complet.webp',
             'price' => 18.99,
             'category' => 'Retouche'
         ]
