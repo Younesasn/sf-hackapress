@@ -30,7 +30,7 @@ php bin/console doctrine:migrations:migrate
 
 Voici un [schéma représentatif](<bdd.png>) de la base de donnée du projet.
 
-### Lexik 📝
+### Lexik 🗝️
 
 Générez les clés publique et privée :
 
