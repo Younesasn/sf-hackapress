@@ -44,3 +44,10 @@ Enfin, chargez les fixtures dans la base de donnée :
 ```bash
 php bin/console doctrine:fixtures:load
 ```
+
+Lancez le projet :
+```bash
+symfony serve --no-tls
+```
+
+Enjoy !
