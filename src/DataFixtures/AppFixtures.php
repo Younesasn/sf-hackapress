@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Civility;
+use App\Entity\Employee;
 use App\Entity\Matter;
 use App\Entity\Payment;
 use App\Entity\Product;
@@ -10,6 +11,7 @@ use App\Entity\ProductCategory;
 use App\Entity\ServiceCategory;
 use App\Entity\Status;
 use App\Entity\Service;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -323,38 +325,38 @@ class AppFixtures extends Fixture
             $manager->persist($service);
         }
 
-        // $user = new User();
-        // $user->setFirstname($faker->firstName);
-        // $user->setLastname($faker->lastName);
-        // $user->setUsername('user');
-        // $user->setPassword('user');
-        // $user->setAddress($faker->address);
-        // $user->setCivility($civility);
-        // $user->setPassword('user');
-        // $manager->persist($user);
+        $user = new User();
+        $user->setFirstname($faker->firstName);
+        $user->setLastname($faker->lastName);
+        $user->setUsername('user');
+        $user->setPassword('user');
+        $user->setAddress($faker->address);
+        $user->setCivility($civility);
+        $user->setPassword('user');
+        $manager->persist($user);
 
-        // $employee = new Employee();
-        // $employee->setFirstname($faker->firstName);
-        // $employee->setLastname($faker->lastName);
-        // $employee->setUsername('employee');
-        // $employee->setPassword('employee');
-        // $employee->setAddress($faker->address);
-        // $employee->setCivility($civility);
-        // $employee->setPassword('employee');
-        // $employee->setRoles(['ROLE_EMPLOYEE']);
-        // $employee->setCategory($serviceCategories[$oneService['category']]);
-        // $manager->persist($employee);
+        $employee = new Employee();
+        $employee->setFirstname($faker->firstName);
+        $employee->setLastname($faker->lastName);
+        $employee->setUsername('employee');
+        $employee->setPassword('employee');
+        $employee->setAddress($faker->address);
+        $employee->setCivility($civility);
+        $employee->setPassword('employee');
+        $employee->setRoles(['ROLE_EMPLOYEE']);
+        $employee->setCategory($serviceCategories[$oneService['category']]);
+        $manager->persist($employee);
 
-        // $admin = new User();
-        // $admin->setFirstname($faker->firstName);
-        // $admin->setLastname($faker->lastName);
-        // $admin->setUsername('admin');
-        // $admin->setPassword('admin');
-        // $admin->setAddress($faker->address);
-        // $admin->setCivility($civility);
-        // $admin->setPassword('admin');
-        // $admin->setRoles(['ROLE_ADMIN']);
-        // $manager->persist($admin);
+        $admin = new User();
+        $admin->setFirstname($faker->firstName);
+        $admin->setLastname($faker->lastName);
+        $admin->setUsername('admin');
+        $admin->setPassword('admin');
+        $admin->setAddress($faker->address);
+        $admin->setCivility($civility);
+        $admin->setPassword('admin');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $manager->persist($admin);
 
         $manager->flush();
     }
