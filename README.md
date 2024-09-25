@@ -2,7 +2,7 @@
 
 ![image](<https://img.shields.io/badge/Symfony-000000?style=for-the-badge&logo=Symfony&logoColor=white>)
 
-Un site de pressing pour les vêtements de qualité et de performance.
+Un site de pressing pour les vêtements de qualité.
 
 Ce projet est le back-end API d'[Hacka'Press](<https://hackapress.you-dev.fr>). Pour la partie front-end, voir [ng-hackapress](<https://github.com/Younesasn/ng-hackapress.git>).
 
