@@ -246,7 +246,7 @@ class AppFixtures extends Fixture
             'category' => 'Retouche'
         ],
         [
-            'name' => 'Retouche Complet',
+            'name' => 'Retouche Complète',
             'description' => 'Service de retouche complet pour des modifications plus importantes, comme le réajustement de la taille ou la refonte de pièces spécifiques.',
             'picture' => 'retouche-complet.webp',
             'price' => 18.99,

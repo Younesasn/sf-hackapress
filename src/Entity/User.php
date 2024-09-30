@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -18,7 +21,12 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\DiscriminatorMap(["user" => User::class, "employee" => Employee::class])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[ApiResource(
-    normalizationContext: ['groups' => ['user:read']]
+    normalizationContext: ['groups' => ['user:read']],
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post()
+    ]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
