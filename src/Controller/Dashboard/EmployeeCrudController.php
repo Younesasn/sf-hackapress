@@ -25,7 +25,7 @@ class EmployeeCrudController extends AbstractCrudController
             TextField::new('lastName'),
             TextField::new('firstName'),
             TextField::new('username'),
-            TextField::new('password')->hideOnIndex(),
+            TextField::new('password')->hideOnIndex()->hideWhenUpdating(),
             TextField::new('address'),
             ArrayField::new('roles')->hideOnIndex(),
         ];
