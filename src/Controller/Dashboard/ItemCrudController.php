@@ -2,7 +2,6 @@
 
 namespace App\Controller\Dashboard;
 
-use App\Controller\Dashboard\Trait\DisableNewTrait;
 use App\Entity\Item;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -20,8 +19,6 @@ use Symfony\Component\Security\Core\Security;
 
 class ItemCrudController extends AbstractCrudController
 {
-    // use DisableNewTrait;
-
     public function __construct(private Security $security)
     {
     }
