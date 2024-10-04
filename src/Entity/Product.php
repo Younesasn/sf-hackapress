@@ -24,7 +24,7 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('user:read')]
+    #[Groups(['user:read', 'productCategory:read'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
@@ -32,7 +32,7 @@ class Product
     private ?ProductCategory $category = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups('user:read')]
+    #[Groups(['user:read', 'productCategory:read'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -120,7 +120,7 @@ class Product
         return $this;
     }
 
-    public function __toString(): string 
+    public function __toString(): string
     {
         return $this->name;
     }

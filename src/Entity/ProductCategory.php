@@ -9,37 +9,44 @@ use App\Repository\ProductCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ProductCategoryRepository::class)]
 #[ApiResource(
     operations: [
         new Get(),
         new GetCollection(),
-    ]
+    ],
+    normalizationContext: ['groups' => ['productCategory:read']],
 )]
 class ProductCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('productCategory:read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('productCategory:read')]
     private ?string $name = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'productCategories')]
+    // #[Groups('productCategory:read')]
     private ?self $parent = null;
 
     /**
      * @var Collection<int, self>
      */
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
+    #[Groups('productCategory:read')]
     private Collection $productCategories;
 
     /**
      * @var Collection<int, Product>
      */
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
+    #[Groups('productCategory:read')]
     private Collection $products;
 
     public function __construct()
