@@ -20,4 +20,3 @@ jobs:
             composer install --optimize-autoloader
             php bin/console d:d:c --if-not-exists && php bin/console d:m:m --no-interaction --allow-no-migration
             php bin/console cache:clear --env=prod
-            composer dump-env prod
