@@ -14,16 +14,13 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash && mv /root/.symfony*/
 # Install Caddy
 RUN curl -fsSL https://getcaddy.com | bash -s personal
 
-# Set working directory
 WORKDIR /app
+COPY . .
 
-# Copy all project files
-COPY ../ /app
-
-# Set correct permissions
+# Permissions
 RUN mkdir -p var/cache var/log && chmod -R 777 var
 
-# PHP config and Caddy
+# Config PHP and Caddy
 COPY php.ini /usr/local/etc/php/php.ini
 COPY Caddyfile /etc/caddy/Caddyfile
 
@@ -31,5 +28,4 @@ COPY Caddyfile /etc/caddy/Caddyfile
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 EXPOSE 80
-
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]

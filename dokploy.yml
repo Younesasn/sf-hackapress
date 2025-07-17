@@ -3,7 +3,7 @@ name: hackapress
 build:
   docker:
     context: .
-    dockerfile: docker/Dockerfile
+    dockerfile: Dockerfile
 
 run:
   command: docker-compose up --build -d
