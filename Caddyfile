@@ -2,6 +2,6 @@ http://0.0.0.0 {
   root * /app/public
   encode gzip
 
-  php_fastcgi php:9000
+  php_fastcgi app:9000
   file_server
 }

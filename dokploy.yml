@@ -6,5 +6,7 @@ build:
     dockerfile: Dockerfile
 
 run:
-  command: docker-compose up --build -d
-  port: 8080
+  compose:
+    file: docker-compose.yml
+    service: app
+    port: 8080
