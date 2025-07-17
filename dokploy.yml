@@ -1,0 +1,10 @@
+name: hackapress
+
+build:
+  docker:
+    path: .
+    dockerfile: docker/Dockerfile
+
+run:
+  command: docker-compose up --build -d
+  port: 8080
