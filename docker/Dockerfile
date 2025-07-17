@@ -23,8 +23,8 @@ COPY . /app
 RUN mkdir -p var/cache var/log && chmod -R 777 var
 
 # Config PHP and Caddy
-COPY docker/php.ini /usr/local/etc/php/php.ini
-COPY docker/Caddyfile /etc/caddy/Caddyfile
+COPY php.ini /usr/local/etc/php/php.ini
+COPY Caddyfile /etc/caddy/Caddyfile
 
 # Install dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
