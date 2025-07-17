@@ -2,7 +2,7 @@ name: hackapress
 
 build:
   docker:
-    path: .
+    context: .
     dockerfile: docker/Dockerfile
 
 run:
