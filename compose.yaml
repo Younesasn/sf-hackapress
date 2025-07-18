@@ -19,10 +19,7 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sf-hackapress.rule=Host(`sf-hackapress.you-dev.fr`)"
-      - "traefik.http.routers.sf-hackapress.entrypoints=websecure"
-      - "traefik.http.routers.sf-hackapress.tls.certresolver=letsencrypt"
-      - "traefik.http.services.sf-hackapress.loadbalancer.server.port=80"
+      - "traefik.http.services.sf-hackapress.loadbalancer.server.port=9000"
 
   web:
     image: nginx:latest
@@ -32,11 +29,13 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - .:/var/www/html
-    ports:
-      - "8080:80"
-    networks:
-      - default
-      
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sf-hackapress.rule=Host(`admin.hackapress.you-dev.fr`)"
+      - "traefik.http.routers.sf-hackapress.entrypoints=websecure"
+      - "traefik.http.routers.sf-hackapress.tls.certresolver=letsencrypt"
+      - "traefik.http.services.sf-hackapress.loadbalancer.server.port=80"
+
   adminer:
     image: adminer:latest
     restart: always
