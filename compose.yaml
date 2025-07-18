@@ -5,39 +5,39 @@ services:
     env_file:
       - ./.env.local
     volumes:
-      - db_data:/var/lib/msql:rw
+      - db_data:/var/lib/mysql:rw
       - ./var/mysql:/var/www/var
     ports:
       - "3640:3306"
 
   php:
-      user: '${USER_ID}:${GROUP_ID}'
-      build: ./docker/php
-      volumes:
-        - .:/var/www:delegated
-      depends_on:
-        - db
-
-  nginx:
-    build: ./docker/nginx
-    ports:
-     - "8000:80"
+    user: '${USER_ID}:${GROUP_ID}'
+    build: ./docker/php
     volumes:
-      - ./public:/var/www/public:delegated
+      - .:/var/www/html:delegated
     depends_on:
-     - php
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sf-hackapress.rule=Host(`sf-hackapress.you-dev.fr`)"
+      - "traefik.http.routers.sf-hackapress.entrypoints=websecure"
+      - "traefik.http.routers.sf-hackapress.tls.certresolver=letsencrypt"
+      - "traefik.http.services.sf-hackapress.loadbalancer.server.port=80"
+
 
   adminer:
     image: adminer:latest
     restart: always
-    environment: 
-      APP_ENV: dev
-      ADMINER_DESIGN: pepa-linha
-      ADMINER_DEFAULT_SERVER:
-    depends_on:
-      - db
     ports:
       - "8082:8080"
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer-hackapress.you-dev.fr`)"
+      - "traefik.http.routers.adminer.entrypoints=websecure"
+      - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
+      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
 
 volumes:
   db_data:

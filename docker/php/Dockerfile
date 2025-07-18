@@ -1,16 +1,20 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.3-apache
 
-# Install dependencies
-RUN apk --no-cache add curl git wget bash dpkg
+# Install extensions
+RUN apt-get update && apt-get install -y \
+    git zip unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype6-dev \
+    libonig-dev libxml2-dev libpq-dev libicu-dev g++ libxslt-dev \
+    && docker-php-ext-install pdo pdo_mysql zip intl gd
 
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
-RUN chmod +x /usr/local/bin/install-php-extensions
+# Enable Apache Rewrite
+RUN a2enmod rewrite
 
-RUN install-php-extensions opcache iconv soap
-RUN install-php-extensions zip intl fileinfo
-RUN install-php-extensions pdo redis mysqli pdo_mysql
-RUN install-php-extensions gd
+# Copy Symfony config
+COPY . /var/www/html/
+WORKDIR /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+# Permissions
+RUN chown -R www-data:www-data /var/www/html
 
-WORKDIR /var/www
+# Use Apache as default web server
+EXPOSE 80
