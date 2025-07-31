@@ -18,5 +18,5 @@ jobs:
             cd /var/www/html/sf-hackapress
             git pull origin master
             composer install --optimize-autoloader
-            pbc d:d:c --if-not-exists && pbc d:m:m --no-interaction --allow-no-migration
-            pbc cache:clear --env=prod
+            php bin/console d:d:c --if-not-exists && php bin/console d:m:m --no-interaction --allow-no-migration
+            php bin/console cache:clear --env=prod
