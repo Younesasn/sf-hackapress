@@ -53,8 +53,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Hackapress')
-            ->setLocales(['fr' => '🇫🇷 Français', 'en' => '🇬🇧 English', 'es' => '🇪🇸 Español', 'it' => '🇮🇹 Italiano', 'de' => '🇩🇪 Deutsch']);
+            ->setTitle('Hackapress');
     }
 
     public function configureMenuItems(): iterable
